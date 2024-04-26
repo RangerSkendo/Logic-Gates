@@ -116,12 +116,26 @@ class Connector:
     def getTo(self):
         return self.togate
 
+class NOrGate(BinaryGate):
+
+    def __init__(self,n):
+        BinaryGate.__init__(self,n)
+
+    def performGateLogic(self):
+
+        a = self.getPinA()
+        b = self.getPinB()
+        if a ==0 and b==0:
+            return 1
+        else:
+            return 0
 
 def main():
    g1 = AndGate("G1")
    g2 = AndGate("G2")
    g3 = OrGate("G3")
    g4 = NotGate("G4")
+   g5 = NOrGate("G5")
    c1 = Connector(g1,g3)
    c2 = Connector(g2,g3)
    c3 = Connector(g3,g4)
