@@ -70,52 +70,6 @@ class OrGate(BinaryGate):
         else:
             return 0
 
-class UnaryGate(LogicGate):
-
-    def __init__(self,n):
-        LogicGate.__init__(self,n)
-
-        self.pin = None
-
-    def getPin(self):
-        if self.pin == None:
-            return int(input("Enter Pin input for gate "+self.getLabel()+"-->"))
-        else:
-            return self.pin.getFrom().getOutput()
-
-    def setNextPin(self,source):
-        if self.pin == None:
-            self.pin = source
-        else:
-            print("Cannot Connect: NO EMPTY PINS on this gate")
-
-
-class NotGate(UnaryGate):
-
-    def __init__(self,n):
-        UnaryGate.__init__(self,n)
-
-    def performGateLogic(self):
-        if self.getPin():
-            return 0
-        else:
-            return 1
-
-
-class Connector:
-
-    def __init__(self, fgate, tgate):
-        self.fromgate = fgate
-        self.togate = tgate
-
-        tgate.setNextPin(self)
-
-    def getFrom(self):
-        return self.fromgate
-
-    def getTo(self):
-        return self.togate
-
 class NOrGate(BinaryGate):
 
     def __init__(self,n):
@@ -173,6 +127,51 @@ class XNorGate(BinaryGate):
         else:
             return 0
 
+class UnaryGate(LogicGate):
+
+    def __init__(self,n):
+        LogicGate.__init__(self,n)
+
+        self.pin = None
+
+    def getPin(self):
+        if self.pin == None:
+            return int(input("Enter Pin input for gate "+self.getLabel()+"-->"))
+        else:
+            return self.pin.getFrom().getOutput()
+
+    def setNextPin(self,source):
+        if self.pin == None:
+            self.pin = source
+        else:
+            print("Cannot Connect: NO EMPTY PINS on this gate")
+
+
+class NotGate(UnaryGate):
+
+    def __init__(self,n):
+        UnaryGate.__init__(self,n)
+
+    def performGateLogic(self):
+        if self.getPin():
+            return 0
+        else:
+            return 1
+
+
+class Connector:
+
+    def __init__(self, fgate, tgate):
+        self.fromgate = fgate
+        self.togate = tgate
+
+        tgate.setNextPin(self)
+
+    def getFrom(self):
+        return self.fromgate
+
+    def getTo(self):
+        return self.togate
     
 
 def main():
