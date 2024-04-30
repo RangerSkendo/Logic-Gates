@@ -126,6 +126,32 @@ class XNorGate(BinaryGate):
             return 1
         else:
             return 0
+        
+class JKFlipFlop(BinaryGate):
+    def __init__(self, n):
+        BinaryGate.__init__(self,n)
+        self.q = input("What is the value of Q?:")
+
+    def performGateLogic(self):
+        if self.q == 0:
+             j = self.getPinA()
+             if j == 0:
+                self.q = 0
+             else:
+                self.q = 1
+            
+        
+        if self.q == 1:
+            k = self.getPinB()
+            if k == 0:
+                self.q = 1
+            else:
+                self.q = 0
+        
+        return self.q 
+
+
+
 
 class UnaryGate(LogicGate):
 
