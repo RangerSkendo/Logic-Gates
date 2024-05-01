@@ -130,7 +130,7 @@ class XNorGate(BinaryGate):
 class JKFlipFlop(BinaryGate):
     def __init__(self, n):
         BinaryGate.__init__(self,n)
-        self.q = input("What is the value of Q?:")
+        self.q = 0
 
     def performGateLogic(self):
         if self.q == 0:
