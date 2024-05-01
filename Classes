@@ -184,6 +184,20 @@ class NotGate(UnaryGate):
         else:
             return 1
 
+class Power(UnaryGate):
+    def __init__(self,n):
+        UnaryGate.__init__(self,n)
+    
+    def performGateLogic(self):
+        return 1
+
+class Switch(UnaryGate):
+    def __init__(self, n):
+        UnaryGate.__init__(self,n)
+    def performGateLogic(self):
+        if self.q == 0 or self.q == 1:
+            return self.q
+
 
 class Connector:
 
@@ -201,16 +215,8 @@ class Connector:
     
 
 def main():
-   g1 = AndGate("G1")
-   g2 = AndGate("G2")
-   g3 = OrGate("G3")
-   g4 = NotGate("G4")
-   g5 = NOrGate("G5")
-   g6 = XorGate("G6")
-   g7 = XNorGate("G7")
-   c1 = Connector(g1,g3)
-   c2 = Connector(g2,g3)
-   c3 = Connector(g3,g4)
-   print(g4.getOutput())
+    while True:
+        
+
 
 main()
