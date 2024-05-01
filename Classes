@@ -196,7 +196,7 @@ class Switch(UnaryGate):
         UnaryGate.__init__(self,n)
     def performGateLogic(self):
         if self.q == 0 or self.q == 1:
-            return self.q
+            return 1
 
 
 class Connector:
