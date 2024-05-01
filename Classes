@@ -215,8 +215,4 @@ class Connector:
     
 
 def main():
-    while True:
-        
-
-
-main()
+    
