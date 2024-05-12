@@ -219,7 +219,28 @@ class Connector:
 
 def main():
     while True:
-        
-
-
+        jk1 = JKFlipFlop("JK1")
+        jk2 = JKFlipFlop("JK2")
+        S = Switch("S")
+        P = Power("P")
+        A1 = AndGate("A1")
+        A2 = AndGate("A2")
+        A3 = AndGate("A3")
+        N1 = NotGate("N1")
+        N2 = NotGate("N2")
+        c1 = Connector(S, A1)
+        c2 = Connector(S, N1)
+        c3 = Connector(S, A2)
+        c4 = Connector(jk1, N2)
+        c5 = Connector(jk2, A1)
+        c6 = Connector(A1, jk1)
+        c7 = Connector(N1, jk1)
+        c8 = Connector(N2, A2)
+        c9 = Connector(A2, jk2)
+        c10 = Connector(P, jk2) 
+        c11 = Connector(N2, A3)
+        c12 = Connector(jk2, A3)
+        print("Output: " + str(A3.getOutput()))
+        jk1.known = False
+        jk2.known = False   
 main()
