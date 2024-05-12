@@ -133,24 +133,27 @@ class JKFlipFlop(BinaryGate):
         self.q = 0
 
     def performGateLogic(self):
-        if self.q == 0:
-             j = self.getPinA()
-             if j == 0:
-                self.q = 0
-             else:
-                self.q = 1
-            
-        
-        if self.q == 1:
-            k = self.getPinB()
-            if k == 0:
-                self.q = 1
-            else:
-                self.q = 0
-        
-        return self.q 
+        if self.known:
+            return self.qn 
+       
+        self.known = True
+        out = 0
+        if self.qn == 0:
+            pinJ = self.getPinA()
+            if pinJ == 0 and self.qn == 0:
+               out = 0
+            elif pinJ == 1 or self.qn == 1:
+               out = 1
+        elif self.qn == 1:
+            pinK = self.getPinB()
+            if pinK == 1 and self.qn == 1:
+                out = 0
+            elif pinK == 1 or self.qn == 1:
+                out = 1
+        self.qn = out
+        return self.qn 
 
-
+               
 
 
 class UnaryGate(LogicGate):
@@ -216,7 +219,31 @@ class Connector:
 
 def main():
     while True:
-        
+        jk1 = JKFlipFlop("JK1")
+        jk2 = JKFlipFlop("JK2")
+        S = Switch("Switch")
+        P = Power("Power")
+        A1 = AndGate("And1")
+        A2 = AndGate("And2")
+        A3 = AndGate("And3")
+        N1 = NotGate("Not1")
+        N2 = NotGate("Not2")
+        c1 = Connector(S, A1)
+        c2 = Connector(S, N1)
+        c3 = Connector(S, A2)
+        c4 = Connector(jk1, N2)
+        c5 = Connector(jk2, A1)
+        c6 = Connector(A1, jk1)
+        c7 = Connector(N1, jk1)
+        c8 = Connector(N2, A2)
+        c9 = Connector(A2, jk2)
+        c10 = Connector(P, jk2)
+        c11 = Connector(N2, A3)
+        c12 = Connector(jk2, A3)
+        print("Output: " + str(A3.getOutput()))
+        jk1.known = False
+        jk2.known = False
+main()
 
 
 main()
